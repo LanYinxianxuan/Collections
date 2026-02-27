@@ -1,0 +1,581 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>独家记忆 - 少年A的记录 (A4 Edition)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700;900&display=swap");
+
+      :root {
+        --eva-red: #ff0000;
+        --eva-black: #000000;
+        --eva-white: #ffffff;
+        --eva-gray: #f5f5f5;
+      }
+
+      body {
+        background-color: #d1d1d1; /* 背景变灰，突出A4纸张 */
+        color: var(--eva-black);
+        font-family: "Noto Serif SC", serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      /* A4 容器样式 */
+      .a4-page {
+        width: 210mm;
+        min-height: 297mm;
+        padding: 20mm;
+        margin: 20px auto;
+        background: var(--eva-white);
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        position: relative;
+        overflow: hidden;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* 打印适配 */
+      @media print {
+        body {
+          background: none;
+        }
+        .a4-page {
+          margin: 0;
+          box-shadow: none;
+          page-break-after: always;
+        }
+        .no-print {
+          display: none;
+        }
+      }
+
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-family: "Noto Serif SC", serif;
+        letter-spacing: -0.02em;
+      }
+
+      .hex-grid {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iMTA0IiB2aWV3Qm94PSIwIDAgNjAgMTA0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Ik02MCAwaC0xTDU5IDUyIDMwIDY4IDAgNTIgVjBoLTF2NTJsMzAgMTZMNjAgNTJWMFoiIGZpbGw9IiNjY2MiIGZpbGwtb3BhY2l0eT0iMC4xNSIvPjwvc3ZnPg==");
+        opacity: 0.3;
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      .nerv-box {
+        border: 2px solid black;
+        padding: 1rem;
+        position: relative;
+        background: white;
+        z-index: 1;
+      }
+
+      .nerv-box::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        right: -5px;
+        width: 10px;
+        height: 10px;
+        background: var(--eva-red);
+      }
+
+      .barcode {
+        width: 80px;
+        height: 20px;
+        background: repeating-linear-gradient(
+          90deg,
+          black,
+          black 2px,
+          transparent 2px,
+          transparent 4px
+        );
+      }
+
+      .article-content p {
+        margin-bottom: 1.5rem;
+        text-indent: 2em;
+        line-height: 1.8;
+        font-size: 1.1rem;
+      }
+
+      .scanline {
+        width: 100%;
+        height: 1px;
+        background: rgba(0, 0, 0, 0.05);
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 10;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <!-- P.01 - 封面 (独立页面) -->
+      <div class="a4-page">
+        <div class="hex-grid"></div>
+        <div
+          class="relative z-10 h-full flex flex-col justify-between flex-grow"
+        >
+          <div class="flex justify-between items-start">
+            <div class="barcode"></div>
+            <p class="text-[10px] font-mono text-right uppercase">
+              Project: Child A<br />Status: Complete
+            </p>
+          </div>
+
+          <div class="border-l-[15px] border-black pl-8 my-auto">
+            <p class="text-xs font-mono tracking-[0.4em] mb-4 text-gray-400">
+              PRIVATE ARCHIVE // COMPOSITION
+            </p>
+            <h1 class="text-[6rem] font-black leading-none mb-2">私の</h1>
+            <h1 class="text-[6rem] font-black leading-none mb-8">MEMORY</h1>
+            <div class="flex items-center space-x-3">
+              <div class="h-[2px] w-20 bg-red-600"></div>
+              <h2 class="text-3xl font-bold uppercase tracking-tighter">
+                my works
+              </h2>
+            </div>
+          </div>
+
+          <div class="max-w-md mb-10">
+            <div class="nerv-box shadow-[10px_10px_0px_0px_rgba(0,0,0,0.05)]">
+              <p
+                class="text-[10px] font-mono uppercase mb-2 text-red-600 font-bold"
+              >
+                Encrypted Data Access
+              </p>
+              <p class="text-2xl font-bold italic leading-tight">
+                “人生如棋，落子无悔；笔绘星辰，意在图南。”
+              </p>
+              <div
+                class="mt-6 flex justify-between items-end border-t border-gray-100 pt-4"
+              >
+                <p class="text-xs text-gray-400 font-mono">
+                  SUBJECT: 彭佳豪 / lanyinxiaoxuan
+                </p>
+                <p class="text-[10px] font-mono">CODE: 01-A</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- P.01 - 目录 (独立页面) -->
+      <div class="a4-page">
+        <div class="hex-grid opacity-[0.15]"></div>
+        <div class="relative z-10 flex flex-col h-full">
+          <div class="flex justify-between items-center mb-20">
+            <h3 class="text-5xl font-black italic">INDEX</h3>
+            <div class="text-right">
+              <p class="text-[10px] font-mono">
+                DOCUMENT TYPE: TABLE_OF_CONTENTS
+              </p>
+              <p class="text-[10px] font-mono">TOTAL_RECORDS: 08</p>
+            </div>
+          </div>
+
+          <div class="flex-grow">
+            <ul class="space-y-10">
+              <li class="group">
+                <div
+                  class="flex justify-between items-end border-b-2 border-black pb-2"
+                >
+                  <div class="flex items-baseline space-x-4">
+                    <span class="text-3xl font-mono text-red-600">01</span>
+                    <span class="text-2xl font-bold">棋局里的博弈与人生</span>
+                  </div>
+                  <span class="text-xl font-mono italic">P.02</span>
+                </div>
+                <p
+                  class="text-xs text-gray-400 mt-2 font-mono uppercase tracking-widest"
+                >
+                  Strategic Analysis // Logic & Balance
+                </p>
+              </li>
+              <li class="group">
+                <div
+                  class="flex justify-between items-end border-b-2 border-black pb-2"
+                >
+                  <div class="flex items-baseline space-x-4">
+                    <span class="text-3xl font-mono text-red-600">02</span>
+                    <span class="text-2xl font-bold">笔尖下的色彩世界</span>
+                  </div>
+                  <span class="text-xl font-mono italic">P.03</span>
+                </div>
+                <p
+                  class="text-xs text-gray-400 mt-2 font-mono uppercase tracking-widest"
+                >
+                  Visual Reconstruction // Emotion & Art
+                </p>
+              </li>
+              <li class="group">
+                <div
+                  class="flex justify-between items-end border-b-2 border-black pb-2"
+                >
+                  <div class="flex items-baseline space-x-4">
+                    <span class="text-3xl font-mono text-red-600">03</span>
+                    <span class="text-2xl font-bold">那一夜，星空璀璨</span>
+                  </div>
+                  <span class="text-xl font-mono italic">P.04</span>
+                </div>
+                <p
+                  class="text-xs text-gray-400 mt-2 font-mono uppercase tracking-widest"
+                >
+                  Celestial Observation // Infinite Horizon
+                </p>
+              </li>
+              <li class="group">
+                <div
+                  class="flex justify-between items-end border-b-2 border-black pb-2"
+                >
+                  <div class="flex items-baseline space-x-4">
+                    <span class="text-3xl font-mono text-red-600">04</span>
+                    <span class="text-2xl font-bold">冬日里的那抹暖阳</span>
+                  </div>
+                  <span class="text-xl font-mono italic">P.05</span>
+                </div>
+                <p
+                  class="text-xs text-gray-400 mt-2 font-mono uppercase tracking-widest"
+                >
+                  Thermal Sensitivity // Maternal Bond
+                </p>
+              </li>
+              <li class="group">
+                <div
+                  class="flex justify-between items-end border-b-2 border-black pb-2"
+                >
+                  <div class="flex items-baseline space-x-4">
+                    <span class="text-3xl font-mono text-red-600">05</span>
+                    <span class="text-2xl font-bold">奔跑在雨中</span>
+                  </div>
+                  <span class="text-xl font-mono italic">P.06</span>
+                </div>
+                <p
+                  class="text-xs text-gray-400 mt-2 font-mono uppercase tracking-widest"
+                >
+                  Physical Endurance // Mental Fortress
+                </p>
+              </li>
+              <li class="group">
+                <div
+                  class="flex justify-between items-end border-b-2 border-black pb-2"
+                >
+                  <div class="flex items-baseline space-x-4">
+                    <span class="text-3xl font-mono text-red-600">06</span>
+                    <span class="text-2xl font-bold">窗外的风景</span>
+                  </div>
+                  <span class="text-xl font-mono italic">P.07</span>
+                </div>
+                <p
+                  class="text-xs text-gray-400 mt-2 font-mono uppercase tracking-widest"
+                >
+                  Environmental Observation // Growth Timeline
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div
+          class="mt-auto pt-10 border-t border-dashed border-gray-300 flex justify-between items-end"
+        >
+          <div class="barcode opacity-30"></div>
+          <span class="text-[10px] font-mono">私の MEMORY</span>
+          <span class="text-[10px] font-mono">01/08</span>
+        </div>
+      </div>
+
+      <!-- P.03 - 棋局 -->
+      <div class="a4-page">
+        <div class="scanline"></div>
+        <div class="relative z-10">
+          <div class="mb-10">
+            <span
+              class="bg-red-600 text-white text-[10px] px-2 py-0.5 font-mono"
+              >PAGE: 03</span
+            >
+            <h2 class="text-4xl font-black mt-4">棋局里的博弈与人生</h2>
+            <div class="w-full h-[1px] bg-black mt-2"></div>
+          </div>
+          <div class="article-content">
+            <p>
+              方寸棋盘，便是战场。我对下棋的痴迷，始于那个蝉鸣不绝的午后。那日，我与爷爷对坐，黑白棋子在纵横交错的线条间跳跃。起初，我仗着几分小聪明，落子飞快，只想围追堵截，尽早将爷爷的黑子吃光。爷爷却不紧不慢，每一步都像是在深思熟虑。渐渐地，我发现自己陷入了死胡同——看似气势汹汹的白子，早已被黑子不动声色地切断了后路。
+            </p>
+            <p>
+              “急什么？”爷爷放下茶杯，微笑着说，“下棋不仅仅是吃子，更是在布大局。一步棋的得失不叫赢，全局的稳健才是真本领。”我看着棋盘，额头上渗出了细汗。爷爷的话像是一道雷电，击碎了我浮躁的屏障。我屏息凝神，开始尝试站在爷爷的角度审视全局，不再急于进攻，而是先稳固防线。那一局，虽然我还是输了，但我第一次感受到了思维博弈的快乐。
+            </p>
+            <p>
+              现在的我，在面对堆积如山的试卷时，总会想起那个棋盘。下棋教会了我：人生如棋，不仅需要冲锋陷阵的勇气，更需要审时度势的耐心和退一步海阔天空的智慧。每一粒棋子的落下，都是一次对未来的慎重抉择。博弈的真谛不在于击败对手，而在于控制贪念，在黑白之间寻找平衡。
+            </p>
+          </div>
+          <div
+            class="mt-10 border-l-4 border-red-600 pl-4 italic text-gray-400 text-sm"
+          >
+            SYNC_RATE: 85% // 核心解析：思维的严谨性
+          </div>
+        </div>
+        <div
+          class="mt-auto pt-10 border-t border-dashed border-gray-300 flex justify-between items-end"
+        >
+          <div class="barcode opacity-30"></div>
+          <span class="text-[10px] font-mono">私の MEMORY</span>
+          <span class="text-[10px] font-mono">02/08</span>
+        </div>
+      </div>
+
+      <!-- P.04 - 画画 -->
+      <div class="a4-page">
+        <div class="scanline"></div>
+        <div class="relative z-10">
+          <div class="mb-10">
+            <span
+              class="bg-red-600 text-white text-[10px] px-2 py-0.5 font-mono"
+              >PAGE: 04</span
+            >
+            <h2 class="text-4xl font-black mt-4">笔尖下的色彩世界</h2>
+            <div class="w-full h-[1px] bg-black mt-2"></div>
+          </div>
+          <div class="article-content">
+            <p>
+              如果说言语会有限制，那么画笔便是通往自由的唯一阶梯。小时候，我是一个内向的孩子。那些无法宣之于口的委屈、对世界的奇思妙想，通通被我倾倒在雪白的画纸上。当我握住画笔，四周的喧嚣仿佛瞬间褪去，整个世界只剩下我和眼前的画布。我喜欢颜料在水中化开的瞬间，那是色彩在交融，也是灵魂在呼吸。
+            </p>
+            <p>
+              有一次参加校内的绘画比赛，题目是《我的世界》。有人画了摩天大楼，有人画了繁花似锦，我却在画布中央涂抹了一片深邃的蓝，然后在蓝色的边缘加了一抹刺眼的柠檬黄。老师不解地问我用意，我轻声回答：“蓝色是孤独，黄色是希望。孤独里总会有光。”那一刻，我感觉自己被治愈了。画画不仅仅是技法的堆叠，更是对自我的深刻挖掘。
+            </p>
+            <p>
+              落笔，皆是情感。在繁杂的学业压力下，画画是我心灵的避难所。在那里，我可以肆意挥洒，不必担心对错。每一幅画都是我成长的足迹，记录着我从稚嫩走向成熟的每一个瞬间。我想，只要手中还握有画笔，我就能描绘出那个属于自己的未来。画笔是灵魂的延伸，画布是自由的疆域，每一抹色彩都是对生命的一次补完。
+            </p>
+          </div>
+          <div
+            class="mt-10 border-l-4 border-red-600 pl-4 italic text-gray-400 text-sm"
+          >
+            SYNC_RATE: 92% // 核心解析：情感的表达力
+          </div>
+        </div>
+        <div
+          class="mt-auto pt-10 border-t border-dashed border-gray-300 flex justify-between items-end"
+        >
+          <div class="barcode opacity-30"></div>
+          <span class="text-[10px] font-mono">私の MEMORY</span>
+          <span class="text-[10px] font-mono">03/08</span>
+        </div>
+      </div>
+
+      <!-- P.05 - 观星 -->
+      <div class="a4-page">
+        <div class="scanline"></div>
+        <div class="relative z-10">
+          <div class="mb-10">
+            <span
+              class="bg-red-600 text-white text-[10px] px-2 py-0.5 font-mono"
+              >PAGE: 05</span
+            >
+            <h2 class="text-4xl font-black mt-4">那一夜，星空璀璨</h2>
+            <div class="w-full h-[1px] bg-black mt-2"></div>
+          </div>
+          <div class="article-content">
+            <p>
+              在城市的钢筋混凝土森林里，我们往往忘记了仰望。直到那个寒假的夜晚，我回到了乡下奶奶家，重新邂逅了那片久谓的星空。那一夜，没有霓虹灯的干扰。我披上厚重的外套，坐在门前的空地上。抬头望去，银河如一条倾斜的绸缎，横跨在深邃的苍穹之上。无数星辰闪烁着，仿佛是千万双眼睛，正安静地俯瞰着这片古老的大地。那种浩瀚感瞬间撞击了我的心脏，让我感到一种前所未有的渺小。
+            </p>
+            <p>
+              我曾为了一次考试的失利而郁郁寡欢，也曾因为一句无心的误解而彻夜难眠。但在这一刻，在这些跨越亿万光年才抵达我眼前的光芒面前，那些所谓的烦恼显得如此苍白。宇宙如此辽阔，恒星亦会坍缩，而人类的喜怒哀乐不过是宇宙尘埃中一闪而过的微光。但我并不感到悲哀，反而觉得释怀——正因为微小，我们每一个瞬间的努力才显得如此珍贵。
+            </p>
+            <p>
+              观星，让我学会了豁达。它告诉我不必纠结于当下的泥泞，因为我们的征途本该是星辰大海。当我收回目光，内心的焦虑早已烟消云散，取而代之的是一种名为“希望”的力量，指引着我继续前行。仰望星空的人，内心永远不会是一片荒原，我们都在寻找属于自己的那颗启明星。
+            </p>
+          </div>
+          <div
+            class="mt-10 border-l-4 border-red-600 pl-4 italic text-gray-400 text-sm"
+          >
+            SYNC_RATE: 100% // 核心解析：视野的开阔度
+          </div>
+        </div>
+        <div
+          class="mt-auto pt-10 border-t border-dashed border-gray-300 flex justify-between items-end"
+        >
+          <div class="barcode opacity-30"></div>
+          <span class="text-[10px] font-mono">私の MEMORY</span>
+          <span class="text-[10px] font-mono">04/08</span>
+        </div>
+      </div>
+
+      <!-- P.06 - 暖阳 -->
+      <div class="a4-page">
+        <div class="scanline"></div>
+        <div class="relative z-10">
+          <div class="mb-10">
+            <span
+              class="bg-red-600 text-white text-[10px] px-2 py-0.5 font-mono"
+              >PAGE: 06</span
+            >
+            <h2 class="text-4xl font-black mt-4">冬日里的那抹暖阳</h2>
+            <div class="w-full h-[1px] bg-black mt-2"></div>
+          </div>
+          <div class="article-content">
+            <p>
+              寒风凛冽，冬天的早晨总是带着一股钻心的凉意。我缩在厚重的羽绒服里，机械地走在去学校的路上，心里还惦记着昨晚没背完的单词，满是焦虑。路过街角的小摊时，一股浓郁的豆浆香气钻进了鼻孔。热气腾腾的白雾后面，是母亲忙碌的身影。为了让我能多睡十分钟，她总是提前出门，在这里等我。“拿着，趁热喝。”母亲递过来一个塑料袋，里面装着刚出锅的包子和温热的豆浆。
+            </p>
+            <p>
+              接过早餐的那一刻，指尖传来的温度顺着血液流向全身，驱散了清晨的寒气。走进教室，阳光正好越过窗棂，斜斜地铺在课桌上。那是冬日里难得的晴天，光影中细小的尘埃在跳动。我喝着豆浆，突然意识到，母亲每天的守候不就像这冬日的暖阳吗？它不灼人，不耀眼，却在你最冷、最疲惫的时候，准时出现在你的生命里，给你最坚实的支撑。
+            </p>
+            <p>
+              那抹暖阳，照亮了我的书桌，也照亮了我的心房。它让我明白，成长路上虽有严寒，但爱总能化作最温暖的光。这种无言的关怀，才是生命中最厚重的补完。母亲的爱，不需要华丽的词藻，就像那抹冬日里的阳光，虽无声，却有着震撼人心的力量。温暖从未远去，它就在每一个平凡的清晨。
+            </p>
+          </div>
+          <div
+            class="mt-10 border-l-4 border-red-600 pl-4 italic text-gray-400 text-sm"
+          >
+            SYNC_RATE: 88% // 核心解析：共情的捕捉力
+          </div>
+        </div>
+        <div
+          class="mt-auto pt-10 border-t border-dashed border-gray-300 flex justify-between items-end"
+        >
+          <div class="barcode opacity-30"></div>
+          <span class="text-[10px] font-mono">私の MEMORY</span>
+          <span class="text-[10px] font-mono">05/08</span>
+        </div>
+      </div>
+
+      <!-- P.07 - 雨中 -->
+      <div class="a4-page">
+        <div class="scanline"></div>
+        <div class="relative z-10">
+          <div class="mb-10">
+            <span
+              class="bg-red-600 text-white text-[10px] px-2 py-0.5 font-mono"
+              >PAGE: 07</span
+            >
+            <h2 class="text-4xl font-black mt-4">奔跑在雨中</h2>
+            <div class="w-full h-[1px] bg-black mt-2"></div>
+          </div>
+          <div class="article-content">
+            <p>
+              起初，只是一两点冰凉落在额头，紧接着，细密的雨丝便如织网般笼罩了整个操场。那是校运会的千米长跑现场。我已经跑到了第六圈，双腿沉重得像是灌了铅，每一次呼吸都带着灼烧般的刺痛。雨水混合着汗水流进眼睛里，刺得我生疼。视线模糊中，我看到身边的对手一个个超越了我，内心的防线几近崩溃——要不，就算了吧？
+            </p>
+            <p>
+              “加油！别停下！”看台上传来同学们的呐喊声。我抹了一把脸上的雨水，咬紧牙关，重新调整呼吸。脚下的塑胶跑道变得湿滑，每一步都需要付出比平时更多的力量。我开始不再关注名次，只盯着前方那一点，告诉自己：再快一点，再坚持一下。雨越下越大，风在耳边呼啸。在那一刻，我突然感受到了一种前所未有的力量。
+            </p>
+            <p>
+              那是一种不屈从于环境、不向疲惫低头的意志。当我最终冲过终点线，整个人瘫倒在草地上时，雨水打在脸上竟然是甜的。奔跑在雨中，我不仅超越了对手，更战胜了那个想要放弃的自己。这场雨，成了我青春里最热血的洗礼。生活也是如此，有些路注定要独自走完，有些雨注定要顶着风去跑。跑下去，天总会晴，意志终将冲破重围。
+            </p>
+          </div>
+          <div
+            class="mt-10 border-l-4 border-red-600 pl-4 italic text-gray-400 text-sm"
+          >
+            SYNC_RATE: 95% // 核心解析：意志的韧性
+          </div>
+        </div>
+        <div
+          class="mt-auto pt-10 border-t border-dashed border-gray-300 flex justify-between items-end"
+        >
+          <div class="barcode opacity-30"></div>
+          <span class="text-[10px] font-mono">私の MEMORY</span>
+          <span class="text-[10px] font-mono">06/08</span>
+        </div>
+      </div>
+
+      <!-- P.08 - 风景 -->
+      <div class="a4-page">
+        <div class="scanline"></div>
+        <div class="relative z-10">
+          <div class="mb-10">
+            <span
+              class="bg-red-600 text-white text-[10px] px-2 py-0.5 font-mono"
+              >PAGE: 08</span
+            >
+            <h2 class="text-4xl font-black mt-4">窗外的风景</h2>
+            <div class="w-full h-[1px] bg-black mt-2"></div>
+          </div>
+          <div class="article-content">
+            <p>
+              我座位的右侧有一扇窗，它像是一幅流动的画框，记录着四季的更迭，也见证了我的初中三年。初一时，窗外是一排郁郁葱葱的樟树。那时候的我们，总喜欢在课间趴在窗台上，谈论着遥不可及的梦想。阳光穿过叶隙，洒下细碎的金子，那时的风景是翠绿而轻盈的，带着少年不识愁滋味的张扬。那是我记忆里最初的同步频率，一切都充满了无限可能。
+            </p>
+            <p>
+              到了初二，窗外的空地开始动工，嘈杂的机器声成了背景音乐。看着高楼拔地而起，就像我们日渐繁重的学业，一点点挤占了玩乐的空间。那一阵子，窗外的风景是灰色的、忙碌的，充满了成长的阵痛与迷茫。每一次望向窗外，都是一次心灵的重构。我们开始学会在喧嚣中寻找宁静，在钢筋水泥中寻找属于自己的坚硬支撑，即便风景不再翠绿，心中亦有丘壑。
+            </p>
+            <p>
+              如今初三，高楼早已封顶，玻璃幕墙反射着夕阳。我再次望向窗外，发现那排樟树长得更高了。窗外的风景变了，窗内的我们也变了。我们不再成群结队地嬉闹，取而代之的是埋头苦读的背影。这扇窗，陪我走过了这段最纯粹的时光。窗外的风景万千，而最美的，莫过于我们在这个画框里，从懵懂少年奋斗成了追梦人的模样。世界虽大，风景就在脚下，只要心中有窗，处处皆是远方。
+            </p>
+          </div>
+          <div
+            class="mt-10 border-l-4 border-red-600 pl-4 italic text-gray-400 text-sm"
+          >
+            SYNC_RATE: 100% // 核心解析：成长的观察力
+          </div>
+        </div>
+        <div
+          class="mt-auto pt-10 border-t border-dashed border-gray-300 flex justify-between items-end"
+        >
+          <div class="barcode opacity-30"></div>
+          <span class="text-[10px] font-mono">私の MEMORY</span>
+          <span class="text-[10px] font-mono">07/08</span>
+        </div>
+      </div>
+      <div class="a4-page">
+        <div class="flex justify-between items-start">
+          <div class="barcode"></div>
+          <p class="text-[10px] font-mono text-right uppercase">
+            Project: Child A<br />Status: Complete
+          </p>
+        </div>
+        <div class="flex justify-between items-end">
+          <h3 class="text-5xl font-black italic">后记</h3>
+          <div class="mt-10 italic text-gray-400 text-sm">
+            关于本人对于此作品的解释
+          </div>
+        </div>
+        <div class="w-full h-[3px] bg-black mt-2"></div>
+        <div class="mt-10">
+          <span class="text-3xl font-mono text-red-600">01</span>
+          <span class="text-2xl font-bold">排版设计</span>
+          <div class="w-full h-[1px] bg-black mt-2"></div>
+          <div class="mt-5">
+            <p>
+              本作品排版由彭佳豪/lanyinxiaoxuan设计,参考EVA动漫作品风格,本作品由HTML5,CSS3构建网页完成
+            </p>
+          </div>
+          <div class="mt-5">
+            <span class="text-3xl font-mono text-red-600">02</span>
+            <span class="text-2xl font-bold">作文内容</span>
+            <div class="w-full h-[1px] bg-black mt-2"></div>
+          </div>
+          <div class="mt-5">
+            <p>
+              本作品作文均为本人现有作文进行再次创作,包括但不限于运用AI工具进行适当的润色
+            </p>
+          </div>
+          <div class="mt-5">
+            <span class="text-3xl font-mono text-red-600">03</span>
+            <span class="text-2xl font-bold">开源支持</span>
+            <div class="w-full h-[1px] bg-black mt-2"></div>
+          </div>
+          <div class="mt-5">
+            <p>
+              本作品在MIT开源许可证下发布。任何人都可以自由使用、修改、分发本作品，包括商业用途。使用本作品的任何部分时，只需要保留原始许可证和版权声明即可。欢迎所有形式的二次创作与改编,Github:https://github.com/LanYinxianxuan/Collections。
+            </p>
+          </div>
+        </div>
+        <div
+          class="mt-auto pt-10 border-t border-dashed border-gray-300 flex justify-between items-end"
+        >
+          <div class="barcode opacity-30"></div>
+          <span class="text-[10px] font-mono">私の MEMORY</span>
+          <span class="text-[10px] font-mono">08/08</span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
